@@ -20,38 +20,23 @@ const TreeNode = ({ post, side, index, onClick }) => {
             nodeRef.current,
             {
                 opacity: 0,
-                x: side === 'left' ? -100 : 100,
-                scale: 0.5,
+                y: 50,
+                scale: 0.9,
             },
             {
                 opacity: 1,
-                x: 0,
+                y: 0,
                 scale: 1,
                 scrollTrigger: {
                     trigger: nodeRef.current,
-                    start: 'top 80%',
-                    end: 'top 50%',
+                    start: 'top 90%',
+                    end: 'top 60%',
                     scrub: 1,
                 },
             }
         );
 
-        // Animate branch growth
-        gsap.fromTo(
-            branchRef.current,
-            {
-                scaleX: 0,
-            },
-            {
-                scaleX: 1,
-                scrollTrigger: {
-                    trigger: nodeRef.current,
-                    start: 'top 80%',
-                    end: 'top 50%',
-                    scrub: 1,
-                },
-            }
-        );
+
 
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());

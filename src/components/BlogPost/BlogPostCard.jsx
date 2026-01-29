@@ -1,11 +1,12 @@
+
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
-import { FiX, FiCalendar, FiTrash2 } from 'react-icons/fi';
+import { FiX, FiTrash2 } from 'react-icons/fi';
 import ReactMarkdown from 'react-markdown';
 import './BlogPostCard.css';
 
-const BlogPostCard = ({ post, onClose, onDelete }) => {
-    const formattedDate = format(new Date(post.timestamp), 'MMMM dd, yyyy • h:mm a');
+const BlogPostCard = ({ post, onClose, onDelete, isAdmin }) => {
+    const formattedDate = format(new Date(post.timestamp), 'MMMM dd, yyyy @ h:mm a');
 
     const handleDelete = () => {
         if (window.confirm('Are you sure you want to delete this post?')) {
@@ -23,90 +24,66 @@ const BlogPostCard = ({ post, onClose, onDelete }) => {
             onClick={onClose}
         >
             <motion.div
-                className="blog-post-card glass"
-                initial={{ scale: 0.5, rotateY: 90 }}
-                animate={{ scale: 1, rotateY: 0 }}
-                exit={{ scale: 0.5, rotateY: -90 }}
-                transition={{ type: 'spring', damping: 20 }}
+                className="retro-window"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Header */}
-                <div className="post-header">
-                    <h1 className="post-title gradient-text">{post.title}</h1>
-                    <div className="post-actions">
-                        <motion.button
-                            className="delete-btn"
-                            onClick={handleDelete}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            title="Delete post"
-                        >
-                            <FiTrash2 />
-                        </motion.button>
-                        <motion.button
-                            className="close-btn-post"
-                            onClick={onClose}
-                            whileHover={{ scale: 1.1, rotate: 90 }}
-                            whileTap={{ scale: 0.9 }}
-                        >
-                            <FiX />
-                        </motion.button>
+                {/* Window Title Bar */}
+                <div className="window-title-bar">
+                    <span className="window-title">{post.title}</span>
+                    <button className="window-close-btn" onClick={onClose}>
+                        <FiX />
+                    </button>
+                </div>
+
+                {/* Window Content */}
+                <div className="window-content">
+                    <div className="post-meta-bar">
+                        <span className="post-date">Posted: {formattedDate}</span>
+                        {isAdmin && (
+                            <button className="delete-btn-retro" onClick={handleDelete} title="Delete Post">
+                                <FiTrash2 /> DELETE
+                            </button>
+                        )}
                     </div>
-                </div>
 
-                {/* Timestamp */}
-                <div className="post-meta">
-                    <FiCalendar />
-                    <span className="post-date glow-blue">{formattedDate}</span>
-                </div>
+                    {post.image && (
+                        <div className="post-image-container">
+                            <img src={post.image} alt={post.title} className="post-image" />
+                        </div>
+                    )}
 
-                <div className="divider"></div>
+                    <div className="post-body-text">
+                        <ReactMarkdown
+                            components={{
+                                a: ({ href, children }) => {
+                                    // Check if the link is an image
+                                    const isImage = /\.(png|jpg|jpeg|gif|webp)$/i.test(href);
 
-                {/* Image */}
-                {post.image && (
-                    <motion.div
-                        className="post-image-container"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        <img src={post.image} alt={post.title} className="post-image pixel-border" />
-                    </motion.div>
-                )}
+                                    // If it's an image link and the text is the URL itself (raw link)
+                                    // OR if the user just wants all image links to embed
+                                    if (isImage) {
+                                        return (
+                                            <div className="embedded-image-container">
+                                                <img
+                                                    src={href}
+                                                    alt={typeof children === 'string' ? children : 'embedded content'}
+                                                    className="post-embedded-image"
+                                                />
+                                            </div>
+                                        );
+                                    }
 
-                {/* Content */}
-                <motion.div
-                    className="post-body"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                >
-                    <ReactMarkdown>{post.content}</ReactMarkdown>
-                </motion.div>
-
-                {/* Decorative stars */}
-                <div className="post-decorations">
-                    {[...Array(6)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className="decoration-star"
-                            style={{
-                                top: `${10 + i * 15}%`,
-                                left: i % 2 === 0 ? '5%' : '95%',
-                            }}
-                            animate={{
-                                rotate: [0, 360],
-                                scale: [0.8, 1.2, 0.8],
-                            }}
-                            transition={{
-                                duration: 4,
-                                repeat: Infinity,
-                                delay: i * 0.5,
+                                    // Default link behavior
+                                    return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
+                                }
                             }}
                         >
-                            ✨
-                        </motion.div>
-                    ))}
+                            {post.content}
+                        </ReactMarkdown>
+                    </div>
                 </div>
             </motion.div>
         </motion.div>

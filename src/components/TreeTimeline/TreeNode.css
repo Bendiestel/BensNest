@@ -4,48 +4,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
-.tree-node.left {
-    justify-content: flex-end;
-    padding-right: calc(50% + 4rem);
-}
-
+/* Staggered logic removed to fix centering and narrowness */
+.tree-node.left,
 .tree-node.right {
-    justify-content: flex-start;
-    padding-left: calc(50% + 4rem);
+    justify-content: center;
+    padding: 0;
 }
 
-/* Branch */
+/* Branch hidden for centered layout */
 .branch {
-    position: absolute;
-    height: 4px;
-    background: linear-gradient(90deg,
-            transparent 0%,
-            var(--y2k-pink) 50%,
-            var(--y2k-blue) 100%);
-    top: 50%;
-    transform: translateY(-50%);
-    transform-origin: center;
-    z-index: 5;
-}
-
-.branch.left {
-    right: 50%;
-    width: 4rem;
-    background: linear-gradient(90deg,
-            var(--y2k-blue) 0%,
-            var(--y2k-pink) 50%,
-            transparent 100%);
-}
-
-.branch.right {
-    left: 50%;
-    width: 4rem;
-    background: linear-gradient(90deg,
-            transparent 0%,
-            var(--y2k-pink) 50%,
-            var(--y2k-blue) 100%);
+    display: none;
 }
 
 .branch-glow {
@@ -63,8 +34,9 @@
 /* Node Card */
 .node-card {
     position: relative;
-    max-width: 400px;
+    max-width: 600px;
     width: 100%;
+    margin: 0 auto;
     cursor: pointer;
     overflow: hidden;
     transition: all var(--transition-medium);
@@ -196,12 +168,12 @@
     border-color: var(--y2k-green);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
 
     .tree-node.left,
     .tree-node.right {
         justify-content: center;
-        padding: 0 2rem;
+        padding: 0 1rem;
     }
 
     .branch {

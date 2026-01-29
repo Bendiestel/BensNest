@@ -1,0 +1,143 @@
+.captcha-window {
+    width: 400px;
+    background: #e0e0e0;
+    border: 2px solid #fff;
+    border-right-color: #444;
+    border-bottom-color: #444;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+    font-family: var(--font-code);
+}
+
+.captcha-header {
+    background: linear-gradient(90deg, #d32f2f, #b71c1c);
+    /* Red for alert */
+}
+
+.captcha-body {
+    padding: 15px;
+    background: #f0f0f0;
+}
+
+.captcha-prompt-box {
+    background: #000080;
+    /* Old windows blue */
+    color: white;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.captcha-instruction {
+    margin: 0;
+    font-size: 14px;
+}
+
+.dread-text {
+    font-family: var(--font-pixel);
+    font-size: 24px;
+    margin: 5px 0;
+    color: #ff00ff;
+    text-shadow: 2px 2px 0 #000;
+    animation: jitter 0.2s infinite;
+}
+
+.captcha-sub {
+    font-size: 12px;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.captcha-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.captcha-item {
+    background: white;
+    border: 2px solid #999;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: all 0.1s;
+}
+
+.captcha-item:active {
+    border-color: #000;
+}
+
+.captcha-item.selected {
+    border: 3px solid #000080;
+    font-weight: bold;
+}
+
+.check-overlay {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: #000080;
+    font-size: 16px;
+}
+
+.captcha-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.captcha-error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+    background: #ffdce0;
+    padding: 5px;
+    border: 1px solid red;
+}
+
+.success-view {
+    text-align: center;
+    padding: 20px;
+}
+
+.success-icon {
+    color: green;
+    margin-bottom: 15px;
+}
+
+.email-reveal {
+    margin-top: 15px;
+    background: #fff;
+    padding: 5px;
+    border: 1px inset #ccc;
+    font-family: monospace;
+}
+
+@keyframes jitter {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(1px, 1px);
+    }
+
+    50% {
+        transform: translate(-1px, 0);
+    }
+
+    75% {
+        transform: translate(0, -1px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
