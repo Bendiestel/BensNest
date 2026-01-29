@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import TreeTimeline from './components/TreeTimeline/TreeTimeline';
 import Guestbook from './components/Guestbook/Guestbook';
+import AboutMe from './components/AboutMe/AboutMe';
 import BlogPostCard from './components/BlogPost/BlogPostCard';
 import EmailCaptchaModal from './components/Sidebar/EmailCaptchaModal';
 import QuipModal from './components/Sidebar/QuipModal';
@@ -46,6 +47,8 @@ function App() {
             />
           ) : activeTab === 'guestbook' ? (
             <Guestbook onClose={() => setActiveTab('home')} />
+          ) : activeTab === 'about' ? (
+            <AboutMe />
           ) : (
             <div className="empty-timeline center-align">
               <h2>Coming Soon!</h2>

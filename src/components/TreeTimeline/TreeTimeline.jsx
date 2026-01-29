@@ -40,8 +40,8 @@ const TreeTimeline = ({ posts, onPostClick }) => {
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring' }}
                 >
-                    <h2 className="gradient-text">🌱 Plant Your First Post! 🌱</h2>
-                    <p>Click "Add New Post" to start growing your tree of thoughts</p>
+                    <h2 className="gradient-text">🌱 A New Beginning 🌱</h2>
+                    <p>My nest is currently empty, but new memories will be planted here soon. Stay tuned!</p>
                 </motion.div>
             </div>
         );

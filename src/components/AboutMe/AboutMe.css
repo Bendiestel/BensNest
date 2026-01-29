@@ -1,0 +1,92 @@
+.letter-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    perspective: 1000px;
+}
+
+.stationary-page {
+    background: #fff;
+    background-image:
+        radial-gradient(#d1d1d1 1px, transparent 1px);
+    background-size: 20px 20px;
+    width: 100%;
+    max-width: 600px;
+    min-height: 500px;
+    padding: 60px;
+    position: relative;
+    box-shadow:
+        1px 1px 0 #ddd,
+        2px 2px 0 #ddd,
+        3px 3px 0 #ddd,
+        15px 15px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #333;
+}
+
+.letter-header {
+    text-align: right;
+    margin-bottom: 40px;
+}
+
+.letter-date {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: #888;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.letter-content h1 {
+    font-family: var(--font-pixel);
+    font-size: 18px;
+    color: var(--accent-pink);
+    margin-bottom: 30px;
+    text-shadow: none !important;
+}
+
+.letter-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.letter-content a {
+    color: var(--accent-blue);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.letter-content a:hover {
+    color: var(--accent-pink);
+}
+
+.letter-footer {
+    margin-top: 50px;
+}
+
+.signature {
+    font-family: 'Handlee', 'Comic Sans MS', cursive;
+    font-size: 24px;
+    color: #555;
+}
+
+.letter-sticker {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    font-size: 40px;
+    transform: rotate(15deg);
+    filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.1));
+    user-select: none;
+}
+
+@media (max-width: 600px) {
+    .stationary-page {
+        padding: 30px;
+    }
+}

@@ -70,37 +70,45 @@ const Guestbook = ({ onClose }) => {
                 </div>
 
                 <AnimatePresence mode="wait">
-                    <motion.div
-                        key={currentPage}
-                        className="notes-area"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        {currentEntries.map(entry => (
-                            <StickyNote key={entry.id} entry={entry} />
-                        ))}
-                    </motion.div>
+                    {entries.length > 0 ? (
+                        <motion.div
+                            key={currentPage}
+                            className="notes-area"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            {currentEntries.map(entry => (
+                                <StickyNote key={entry.id} entry={entry} />
+                            ))}
+                        </motion.div>
+                    ) : (
+                        <div className="notes-area empty-notes">
+                            <p className="note-message">"This guestbook is waiting for its first memory... ✨"</p>
+                        </div>
+                    )}
                 </AnimatePresence>
 
-                <div className="pagination-controls">
-                    <button
-                        disabled={currentPage === 0}
-                        onClick={() => setCurrentPage(prev => prev - 1)}
-                        className="page-btn"
-                    >
-                        &lt; Previous
-                    </button>
-                    <span className="page-info">Page {currentPage + 1} of {totalPages}</span>
-                    <button
-                        disabled={currentPage === totalPages - 1}
-                        onClick={() => setCurrentPage(prev => prev + 1)}
-                        className="page-btn"
-                    >
-                        Next &gt;
-                    </button>
-                </div>
+                {entries.length > 0 && (
+                    <div className="pagination-controls">
+                        <button
+                            disabled={currentPage === 0}
+                            onClick={() => setCurrentPage(prev => prev - 1)}
+                            className="page-btn"
+                        >
+                            &lt; Previous
+                        </button>
+                        <span className="page-info">Page {currentPage + 1} of {totalPages}</span>
+                        <button
+                            disabled={currentPage === totalPages - 1}
+                            onClick={() => setCurrentPage(prev => prev + 1)}
+                            className="page-btn"
+                        >
+                            Next &gt;
+                        </button>
+                    </div>
+                )}
 
                 <div className="scrapbook-footer">
                     <p>Want to sign? E-mail me and I'll add your note!</p>

@@ -12,7 +12,7 @@ const Header = () => {
 
             <div className="marquee-container">
                 <marquee scrollamount="5" scrolldelay="100">
-                    ★ WELCOME TO MY NEST ★ GUESTBOOK COMING SOON ★
+                    ★ WELCOME TO MY NEST ★ A LETTER FROM ME ★
                 </marquee>
             </div>
         </div>

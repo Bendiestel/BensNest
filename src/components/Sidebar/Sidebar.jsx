@@ -65,7 +65,7 @@ const Sidebar = ({ onEmailClick, onQuipClick, activeTab, onTabChange }) => {
                             className={activeTab === 'about' ? 'active-link' : ''}
                             onClick={(e) => { e.preventDefault(); onTabChange('about'); }}
                         >
-                            About Me
+                            Letter from Me
                         </a>
                     </li>
                     <li>
