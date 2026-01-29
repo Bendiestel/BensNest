@@ -1,11 +1,13 @@
-
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import avatar from '../../assets/avatar.png';
+import avatarNormal from '../../assets/avatar_normal.png';
+import avatarSuper from '../../assets/avatar_super.png';
 import quips from '../../data/quips.json';
 import './Sidebar.css';
 
 const Sidebar = ({ onEmailClick, onQuipClick, activeTab, onTabChange }) => {
+    const [isSuper, setIsSuper] = useState(false);
 
     return (
         <aside className="sidebar">
@@ -13,13 +15,15 @@ const Sidebar = ({ onEmailClick, onQuipClick, activeTab, onTabChange }) => {
             <div className="sidebar-box profile-box">
                 <div className="box-header">:: PROFILE ::</div>
                 <div className="box-content center-align">
-                    <img
-                        src={avatar}
-                        alt="Ben Diestel"
-                        className="profile-pic"
-                    />
+                    <div className="avatar-container" onClick={() => setIsSuper(!isSuper)} title="Click to Toggle!">
+                        <img
+                            src={isSuper ? avatarNormal : avatarSuper}
+                            alt={isSuper ? "Super Ben" : "Ben"}
+                            className="profile-pic"
+                        />
+                    </div>
                     <div className="status-lines">
-                        <p><strong>Name:</strong> Ben</p>
+                        <p><strong>Name:</strong> {isSuper ? 'SUPER BEN' : 'Ben'}</p>
                         <p><strong>Mood:</strong> 🎧 Coding</p>
                         <p><strong>Listening:</strong> Grimes</p>
                         <p><strong>Location:</strong> Montreal, QC</p>
