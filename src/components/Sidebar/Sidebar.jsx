@@ -5,7 +5,7 @@ import avatar from '../../assets/avatar.png';
 import quips from '../../data/quips.json';
 import './Sidebar.css';
 
-const Sidebar = ({ onEmailClick }) => {
+const Sidebar = ({ onEmailClick, onQuipClick, activeTab, onTabChange }) => {
 
     return (
         <aside className="sidebar">
@@ -33,7 +33,9 @@ const Sidebar = ({ onEmailClick }) => {
                 <div className="box-content scroll-box">
                     {quips.map((quip, index) => (
                         <div key={quip.id}>
-                            <p className="quip-text">"{quip.text}"</p>
+                            <div className="quip-item" onClick={() => onQuipClick(quip)}>
+                                <p className="quip-text">"{quip.text}"</p>
+                            </div>
                             {index < quips.length - 1 && <div className="update-divider">---</div>}
                         </div>
                     ))}
@@ -44,9 +46,33 @@ const Sidebar = ({ onEmailClick }) => {
             <div className="sidebar-box nav-box">
                 <div className="box-header">:: NAV ::</div>
                 <ul className="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Me</a></li>
-                    <li><a href="#">Guestbook</a></li>
+                    <li>
+                        <a
+                            href="#"
+                            className={activeTab === 'home' ? 'active-link' : ''}
+                            onClick={(e) => { e.preventDefault(); onTabChange('home'); }}
+                        >
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            className={activeTab === 'about' ? 'active-link' : ''}
+                            onClick={(e) => { e.preventDefault(); onTabChange('about'); }}
+                        >
+                            About Me
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            className={activeTab === 'guestbook' ? 'active-link' : ''}
+                            onClick={(e) => { e.preventDefault(); onTabChange('guestbook'); }}
+                        >
+                            Guestbook
+                        </a>
+                    </li>
                     <li>
                         <a
                             href="#"

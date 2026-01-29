@@ -4,8 +4,10 @@ import { usePosts } from './hooks/usePosts';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import TreeTimeline from './components/TreeTimeline/TreeTimeline';
+import Guestbook from './components/Guestbook/Guestbook';
 import BlogPostCard from './components/BlogPost/BlogPostCard';
 import EmailCaptchaModal from './components/Sidebar/EmailCaptchaModal';
+import QuipModal from './components/Sidebar/QuipModal';
 import { Container, HeaderArea, SidebarArea, MainContent, FooterArea } from './components/Layout/SiteContainer';
 import './App.css';
 
@@ -13,6 +15,8 @@ function App() {
   const { posts } = usePosts();
   const [selectedPost, setSelectedPost] = useState(null);
   const [showEmailCaptcha, setShowEmailCaptcha] = useState(false);
+  const [selectedQuip, setSelectedQuip] = useState(null);
+  const [activeTab, setActiveTab] = useState('home');
 
   const handlePostClick = (post) => {
     setSelectedPost(post);
@@ -26,14 +30,28 @@ function App() {
         </HeaderArea>
 
         <SidebarArea>
-          <Sidebar onEmailClick={() => setShowEmailCaptcha(true)} />
+          <Sidebar
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            onEmailClick={() => setShowEmailCaptcha(true)}
+            onQuipClick={(quip) => setSelectedQuip(quip)}
+          />
         </SidebarArea>
 
         <MainContent>
-          <TreeTimeline
-            posts={posts}
-            onPostClick={handlePostClick}
-          />
+          {activeTab === 'home' ? (
+            <TreeTimeline
+              posts={posts}
+              onPostClick={handlePostClick}
+            />
+          ) : activeTab === 'guestbook' ? (
+            <Guestbook onClose={() => setActiveTab('home')} />
+          ) : (
+            <div className="empty-timeline center-align">
+              <h2>Coming Soon!</h2>
+              <p>This section is currently under construction.</p>
+            </div>
+          )}
         </MainContent>
 
         <FooterArea>
@@ -54,6 +72,13 @@ function App() {
           <EmailCaptchaModal
             onClose={() => setShowEmailCaptcha(false)}
             email="ben.diestel@mail.mcgill.ca"
+          />
+        )}
+
+        {selectedQuip && (
+          <QuipModal
+            quip={selectedQuip}
+            onClose={() => setSelectedQuip(null)}
           />
         )}
       </AnimatePresence>

@@ -100,6 +100,13 @@
     text-shadow: 0 0 5px var(--accent-blue);
 }
 
+.active-link {
+    color: var(--accent-pink) !important;
+    font-weight: bold;
+    text-shadow: 0 0 8px var(--accent-pink);
+    text-decoration: underline !important;
+}
+
 /* Buttons/Webring */
 .buttons-grid {
     display: flex;
@@ -181,4 +188,23 @@
 
 .social-link svg {
     font-size: 16px;
+}
+
+/* Interactive Quips */
+.quip-item {
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.quip-item:hover {
+    transform: scale(1.05);
+    background: rgba(255, 105, 180, 0.1);
+    /* Subtle pink glow */
+}
+
+.quip-text {
+    margin: 0;
+    line-height: 1.4;
 }
